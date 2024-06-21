@@ -40,7 +40,6 @@ doc/api/
 ### Flutter ###
 # Flutter/Dart/Pub related
 **/doc/api/
-.fvm/flutter_sdk
 .pub-cache/
 .pub/
 coverage/
@@ -104,7 +103,6 @@ lib/generated_plugin_registrant.dart
 
 # Icon must end with two \r
 Icon
-
 
 # Thumbnails
 ._*
@@ -261,3 +259,6 @@ fabric.properties
 !/gradle/wrapper/gradle-wrapper.jar
 
 # End of https://www.toptal.com/developers/gitignore/api/androidstudio,flutter,dart,macos
+
+# FVM Version Cache
+.fvm/
