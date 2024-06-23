@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pharma_bros_project/main/view/main_screen.dart';
 
 void main() {
-  runApp(const _MyApp());
+  runApp(
+    const ProviderScope(
+      child: _MyApp(),
+    ),
+  );
 }
 
 class _MyApp extends StatelessWidget {
@@ -15,10 +20,8 @@ class _MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/main',
       routes: {
-        '/main': (_) => const MainScreen()
+        '/main': (_) => const MainScreen(),
       },
     );
   }
 }
-
-
