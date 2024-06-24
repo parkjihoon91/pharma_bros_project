@@ -9,21 +9,6 @@ import 'package:pharma_bros_project/main/home/provider/home_provider.dart';
 import '../../../common/model/api_default_model.dart';
 import '../component/home_list_item_widget.dart';
 
-final List<HomeListItemModelData> testData = [
-  HomeListItemModelData(
-      id: 34910,
-      brand_name: "YDY뉴트리션",
-      name: "YDY 퓨어리포좀 글루타치온 5g x 30포",
-      image_url:
-          "https://d1r0f51o4pfsh8.cloudfront.net/crwal_product/image/34910.jpeg",
-      is_purchase_available: true,
-      is_sold_out: false,
-      discount_product_percent: 5,
-      buy_shop_link: "https://store.kakao.com/befpharm/products/373357358",
-      is_domestic: true,
-      pick_type: ""),
-];
-
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
@@ -46,7 +31,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.dispose();
   }
 
-  // Navigator.of(context).pushNamed('/product_detail', arguments: '35028');
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -103,19 +87,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           Expanded(
             child: Consumer(
               builder: (_, ref, child) {
-                // return Expanded(
-                //   child: ListView.separated(
-                //     itemBuilder: (_, index) {
-                //       return HomeListItemWidget(data: testData[0]);
-                //       //TODO 주석풀기
-                //       // data: data.data.product_list[index]);
-                //     },
-                //     separatorBuilder: (_, index) => const DividerWidget(),
-                //     itemCount: 10,
-                //   ),
-                // );
-
-                //TODO 주석풀기
                 final state = ref.watch(homeProvider);
 
                 if (state == null) {
@@ -142,8 +113,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     const DividerWidget(),
                     Padding(
                       padding: const EdgeInsets.all(16.0),
-                      // TODO 주석
-                      // child: Text('검색 결과 11건'),
                       child: Text('검색 결과 ${data.data.total_count}건'),
                     ),
                     const DividerWidget(),
@@ -174,8 +143,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       Expanded(
                         child: ListView.separated(
                           itemBuilder: (_, index) {
-                            // return HomeListItemWidget(data: testData[0]);
-                            //TODO 주석풀기
                             return GestureDetector(
                               onTap: () => Navigator.of(context).pushNamed(
                                   '/product_detail',

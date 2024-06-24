@@ -6,7 +6,7 @@ import 'package:pharma_bros_project/common/component/divider_widget.dart';
 import 'package:pharma_bros_project/common/utils/custom_text_style.dart';
 import 'package:pharma_bros_project/common/utils/utils.dart';
 import 'package:pharma_bros_project/main/home/component/list_item_domestic.dart';
-import 'package:pharma_bros_project/main/product/component/detail_titme_widget.dart';
+import 'package:pharma_bros_project/main/product/component/detail_time_widget.dart';
 import 'package:pharma_bros_project/main/product/component/row_widget.dart';
 import 'package:pharma_bros_project/main/product/model/product_detail_model.dart';
 import 'package:pharma_bros_project/main/product/provider/product_detail_provider.dart';
@@ -41,11 +41,10 @@ class ProductDetail extends ConsumerWidget {
                 style: CustomTextStyle.textStyleHeading3
                     .copyWith(color: const Color(0xff202022)),
               ),
-              bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(1.0),
-                child: Container(
-                  color: Colors.grey,
-                  height: 1.0,
+              shape: const Border(
+                bottom: BorderSide(
+                  color: Color(0xffECECEE),
+                  width: 1,
                 ),
               ),
             ),
@@ -227,15 +226,6 @@ class _Top extends StatelessWidget {
             border: Border(
               bottom: BorderSide(color: Colors.grey, width: 3),
             ),
-            //TODO 그림자
-            // boxShadow: [
-            //   BoxShadow(
-            //     color: Colors.grey.withOpacity(0.7),
-            //     spreadRadius: 0,
-            //     blurRadius: 5.0,
-            //     offset: Offset(0, 10), // changes position of shadow
-            //   ),
-            // ],
           ),
           child: Column(
             children: [
@@ -506,6 +496,18 @@ class _NutritionInformation extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (_, index) {
+                    final result = productData
+                        .data.nutrition_information[index].description;
+                    final resultSplit = result.split(',');
+                    String description = '';
+                    for (int i = 0; i < resultSplit.length; i++) {
+                      if (i == 0) {
+                        description += resultSplit[i];
+                        continue;
+                      }
+                      description += '\n- ${resultSplit[i]}';
+                    }
+
                     return Container(
                       padding: const EdgeInsets.symmetric(
                         vertical: 24,
@@ -520,18 +522,15 @@ class _NutritionInformation extends StatelessWidget {
                       ),
                       child: Column(
                         children: [
-                          Text(
-                            productData.data.nutrition_information[index]
-                                .nutrition_name,
-                            style: CustomTextStyle.textStyleHeading3
-                                .copyWith(color: const Color(0xff202022)),
-                          ),
+                          HighLightedText(
+                              productData.data.nutrition_information[index]
+                                  .nutrition_name,
+                              color: Colors.pinkAccent),
                           const SizedBox(
                             height: 8,
                           ),
                           Text(
-                            productData
-                                .data.nutrition_information[index].description,
+                            description,
                             style: CustomTextStyle.textStyleBody1
                                 .copyWith(color: const Color(0xff202022)),
                           ),
@@ -610,6 +609,62 @@ class _ProductFeatures extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class HighLightedText extends StatelessWidget {
+  final String data;
+  final Color color;
+
+  const HighLightedText(
+    this.data, {
+    required this.color,
+    super.key,
+  });
+
+  Size getTextSize({
+    required String text,
+    required TextStyle style,
+    required BuildContext context,
+  }) {
+    final Size size = (TextPainter(
+      text: TextSpan(text: text, style: style),
+      maxLines: 1,
+      textScaler: MediaQuery.of(context).textScaler,
+      textDirection: TextDirection.ltr,
+    )..layout())
+        .size;
+    return size;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final Size textSize = getTextSize(
+      text: data,
+      style: CustomTextStyle.textStyleHeading3
+          .copyWith(color: const Color(0xff202022)),
+      context: context,
+    );
+    return Stack(
+      children: [
+        Text(
+          data,
+          style: CustomTextStyle.textStyleHeading3
+              .copyWith(color: const Color(0xff202022)),
+        ),
+        Positioned(
+          top: textSize.height / 2,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(2),
+              color: color.withOpacity(0.2),
+            ),
+            height: textSize.height / 2,
+            width: textSize.width,
+          ),
+        )
+      ],
     );
   }
 }

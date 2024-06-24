@@ -49,7 +49,7 @@ class MyInfoWidget extends StatelessWidget {
                   .copyWith(color: const Color(0xff202022)),
             ),
           ),
-          Icon(
+          const Icon(
             Icons.arrow_forward_ios,
             size: 20,
           )

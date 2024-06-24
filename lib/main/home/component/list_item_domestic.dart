@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pharma_bros_project/common/utils/custom_text_style.dart';
 
+// 국내 / 해외
 class ListItemDomestic extends StatelessWidget {
   final bool isDomestic;
 
@@ -9,7 +10,6 @@ class ListItemDomestic extends StatelessWidget {
     required this.isDomestic,
   });
 
-  // 1FAF96
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -15,6 +15,7 @@ class DividerWidget extends StatelessWidget {
     return Divider(
       height: height,
       thickness: thickness,
+      color: const Color(0xffECECEE),
     );
   }
 }

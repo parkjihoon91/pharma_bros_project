@@ -33,12 +33,11 @@ class HomeStateNotifier extends StateNotifier<ApiDefaultModelBase?> {
     try {
       if (_debounce?.isActive ?? false) _debounce?.cancel();
       _debounce = Timer(const Duration(milliseconds: 1000), () async {
-          print('이벤트 횟수, text:$text');
           state = await homeRepository.getSearch(text ?? 'YDY', 1, 10);
           _debounce?.cancel();
       });
     } catch (e, stack) {
-      Log().logger.e('testRequest e: $e\nstack: $stack');
+      Log().logger.e('getSearch e: $e\nstack: $stack');
       if (e is DioException) {
         if (e.error is SocketException) {
           state = ApiDefaultModelError('통신상태를 확인해주세요.');

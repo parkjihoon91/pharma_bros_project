@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../common/utils/custom_text_style.dart';
 
-// 식전, 식후, 취침전 바뀌는 위젯
+// 식전, 식후, 취침전 String 값에 바뀌는 위젯
 class DetailTimeWidget extends StatelessWidget {
   final String detailTime;
 

@@ -3,9 +3,15 @@ import 'package:pharma_bros_project/common/component/divider_widget.dart';
 import 'package:pharma_bros_project/common/utils/custom_text_style.dart';
 import 'package:pharma_bros_project/main/product/component/my_info_widget.dart';
 
-class MyInfoScreen extends StatelessWidget {
+// 피그마 파일에서 divider 기준으로 UI 나눔
+class MyInfoScreen extends StatefulWidget {
   const MyInfoScreen({super.key});
 
+  @override
+  State<MyInfoScreen> createState() => _MyInfoScreenState();
+}
+
+class _MyInfoScreenState extends State<MyInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -14,6 +20,7 @@ class MyInfoScreen extends StatelessWidget {
           PreferredSize(
             preferredSize: const Size.fromHeight(54),
             child: AppBar(
+              centerTitle: false,
               title: Text(
                 '내 정보',
                 style: CustomTextStyle.textStyleHeading3.copyWith(
@@ -24,7 +31,7 @@ class MyInfoScreen extends StatelessWidget {
               ),
               shape: const Border(
                 bottom: BorderSide(
-                  color: Colors.grey,
+                  color: Color(0xffECECEE),
                   width: 1,
                 ),
               ),
@@ -59,7 +66,7 @@ class MyInfoScreen extends StatelessWidget {
             height: 10,
             thickness: 10,
           ),
-          const _Bottom(),
+          _Bottom(),
         ],
       ),
     );
@@ -86,12 +93,12 @@ class _NameEmail extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Pharmabros',
+                  '박지훈',
                   style: CustomTextStyle.textStyleHeading3
                       .copyWith(color: const Color(0xff202022)),
                 ),
                 Text(
-                  'pharmabros@pharma-bros.com',
+                  '2dnjf10@gmail.com',
                   style: CustomTextStyle.textStyleBody2
                       .copyWith(color: const Color(0xffA1A2AA)),
                 ),
@@ -184,7 +191,9 @@ class _MyParticipation extends StatelessWidget {
 }
 
 class _Bottom extends StatelessWidget {
-  const _Bottom({super.key});
+  const _Bottom({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -224,7 +233,8 @@ class _Bottom extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: () => Navigator.of(context)
+                          .pushNamed('/webview', arguments: '이용약관'),
                       child: Text(
                         '이용약관',
                         style: CustomTextStyle.textStyleBody2
@@ -237,7 +247,8 @@ class _Bottom extends StatelessWidget {
                           .copyWith(color: const Color(0xff808288)),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () => Navigator.of(context)
+                          .pushNamed('/webview', arguments: '개인정보처리방침'),
                       child: Text(
                         '개인정보처리방침',
                         style: CustomTextStyle.textStyleBody2
