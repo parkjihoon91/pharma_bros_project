@@ -17,7 +17,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class _MainScreenState extends State<MainScreen> {
       body: SafeArea(
         child: IndexedStack(
           index: _currentIndex,
-          children: [
+          children: const [
             HomeScreen(),
             MyInfoScreen(),
           ],
