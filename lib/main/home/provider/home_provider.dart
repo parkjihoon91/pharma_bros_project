@@ -33,8 +33,8 @@ class HomeStateNotifier extends StateNotifier<ApiDefaultModelBase?> {
     try {
       if (_debounce?.isActive ?? false) _debounce?.cancel();
       _debounce = Timer(const Duration(milliseconds: 1000), () async {
-          print('이벤트 횟수');
-          state = await homeRepository.getTest(text ?? 'YDY', 1, 10);
+          print('이벤트 횟수, text:$text');
+          state = await homeRepository.getSearch(text ?? 'YDY', 1, 10);
           _debounce?.cancel();
       });
     } catch (e, stack) {

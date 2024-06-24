@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home_repository.dart';
+part of 'product_detail_repository.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'home_repository.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _HomeRepository implements HomeRepository {
-  _HomeRepository(
+class _ProductDetailRepository implements ProductDetailRepository {
+  _ProductDetailRepository(
     this._dio, {
     this.baseUrl,
   });
@@ -19,29 +19,20 @@ class _HomeRepository implements HomeRepository {
   String? baseUrl;
 
   @override
-  Future<HomeListItem> getSearch(
-    String? targetWord,
-    int page,
-    int size,
-  ) async {
+  Future<ProductDetailModel> getProductDetail(int productId) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'target_word': targetWord,
-      r'page': page,
-      r'size': size,
-    };
-    queryParameters.removeWhere((k, v) => v == null);
+    final queryParameters = <String, dynamic>{r'product_id': productId};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<HomeListItem>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<ProductDetailModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/search/product',
+              '/product/detail',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -50,7 +41,7 @@ class _HomeRepository implements HomeRepository {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = HomeListItem.fromJson(_result.data!);
+    final value = ProductDetailModel.fromJson(_result.data!);
     return value;
   }
 

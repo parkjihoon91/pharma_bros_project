@@ -37,7 +37,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _textEditingController = TextEditingController();
+    _textEditingController = TextEditingController(text: 'YDY');
   }
 
   @override
@@ -46,6 +46,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.dispose();
   }
 
+  // Navigator.of(context).pushNamed('/product_detail', arguments: '35028');
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -64,14 +65,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 height: 38,
                 child: TextField(
                   onChanged: (text) {
-                    ref.read(homeProvider.notifier).fetch(text: text);
+                    if (text.isNotEmpty) {
+                      ref.read(homeProvider.notifier).fetch(text: text);
+                    }
                   },
                   controller: _textEditingController,
                   style: CustomTextStyle.textStyleBody1,
                   textAlign: TextAlign.start,
                   textAlignVertical: TextAlignVertical.center,
-                  textInputAction: TextInputAction.search,
-                  onSubmitted: onSubmitted,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(vertical: 5)
                         .add(const EdgeInsets.only(left: 8)),
@@ -102,7 +103,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           Expanded(
             child: Consumer(
               builder: (_, ref, child) {
-
                 // return Expanded(
                 //   child: ListView.separated(
                 //     itemBuilder: (_, index) {
@@ -176,8 +176,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           itemBuilder: (_, index) {
                             // return HomeListItemWidget(data: testData[0]);
                             //TODO 주석풀기
-                            return HomeListItemWidget(data: data.data.product_list[index]);
-
+                            return GestureDetector(
+                              onTap: () => Navigator.of(context).pushNamed(
+                                  '/product_detail',
+                                  arguments: data.data.product_list[index].id),
+                              child: HomeListItemWidget(
+                                  data: data.data.product_list[index]),
+                            );
                           },
                           separatorBuilder: (_, index) => const DividerWidget(),
                           itemCount: 10,

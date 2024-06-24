@@ -17,8 +17,8 @@ final homeRepositoryProvider = Provider<HomeRepository>((ref) {
 abstract class HomeRepository {
   factory HomeRepository(Dio dio, {String baseUrl}) = _HomeRepository;
 
-  @GET('/')
-  Future<HomeListItem> getTest(
+  @GET('/search/product')
+  Future<HomeListItem> getSearch(
     @Query('target_word') String? targetWord,
     @Query('page') int page,
     @Query('size') int size,

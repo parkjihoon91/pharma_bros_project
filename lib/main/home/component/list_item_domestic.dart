@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:pharma_bros_project/common/utils/custom_text_style.dart';
 
 class ListItemDomestic extends StatelessWidget {
-  final String text;
+  final bool isDomestic;
 
   const ListItemDomestic({
     super.key,
-    required this.text,
+    required this.isDomestic,
   });
 
+  // 1FAF96
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,13 +19,19 @@ class ListItemDomestic extends StatelessWidget {
         borderRadius: const BorderRadius.all(
           Radius.circular(4),
         ),
-        border: Border.all(color: const Color(0xffFFA722))
+        border: Border.all(
+          color: isDomestic == true
+              ? const Color(0xffFFA722)
+              : const Color(0xff1FAF96),
+        ),
       ),
       alignment: Alignment.center,
       child: Text(
-        text,
-        style: CustomTextStyle.textStyleBody3
-            .copyWith(color: const Color(0xffFFA722)),
+        isDomestic == true ? '국내' : '해외',
+        style: CustomTextStyle.textStyleBody3.copyWith(
+            color: isDomestic == true
+                ? const Color(0xffFFA722)
+                : const Color(0xff1FAF96)),
       ),
     );
   }

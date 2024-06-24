@@ -13,14 +13,6 @@ class HomeListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final domesticWidget = data.is_domestic == true
-        ? const ListItemDomestic(
-            text: '국내',
-          )
-        : const ListItemDomestic(
-            text: '해외',
-          );
-
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Row(
@@ -64,7 +56,7 @@ class HomeListItemWidget extends StatelessWidget {
                 const SizedBox(
                   height: 4,
                 ),
-                domesticWidget,
+                ListItemDomestic(isDomestic: data.is_domestic),
               ],
             ),
           )
